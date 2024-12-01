@@ -5,6 +5,9 @@ on:
     - cron: '0 0 * * *' # Runs daily at midnight UTC
   workflow_dispatch: # Allows manual triggering of the workflow
 
+permissions:
+  contents: write  # Allows pushing commits to the repository
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -12,8 +15,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          persist-credentials: false # Important to prevent using the default token
-          fetch-depth: 0             # Fetch all history for all branches and tags
+          fetch-depth: 0  # Fetch all history for all branches and tags
 
       - name: Set Up Git Configuration
         run: |
@@ -29,4 +31,4 @@ jobs:
         run: |
           git checkout main
           git pull --rebase upstream main --allow-unrelated-histories
-          git push origin main --force-with-lease
+          git push origin main
