@@ -28,5 +28,5 @@ jobs:
       - name: Sync with Upstream using Rebase
         run: |
           git checkout main
-          git pull --rebase upstream main
+          git pull --rebase upstream main --allow-unrelated-histories
           git push origin main --force-with-lease
